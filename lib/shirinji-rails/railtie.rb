@@ -1,3 +1,5 @@
+require 'shirinji'
+
 module ShirinjiRails
   class Railtie < Rails::Railtie
     config.shirinji = ActiveSupport::OrderedOptions.new
