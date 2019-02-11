@@ -14,12 +14,14 @@ module ShirinjiRails
       return unless (conf = config_path)
 
       map = eval File.read(conf)
-      config.shirinji.resolver = Shirinji::Resolver.new(map)
+      resolver = Shirinji::Resolver.new(map)
 
       ActiveSupport::Reloader.to_prepare do
         map = eval File.read(conf)
-        ::Rails.application.config.shirinji.resolver.reload(map)
+        resolver.reload(map)
       end
+
+      config.shirinji.resolver = resolver
     end
 
     private
