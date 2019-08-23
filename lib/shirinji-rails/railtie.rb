@@ -13,11 +13,11 @@ module ShirinjiRails
     def init!
       return unless (conf = config_path)
 
-      map = eval File.read(conf)
+      map = Shirinji::Map.load(conf)
       resolver = Shirinji::Resolver.new(map)
 
       ActiveSupport::Reloader.to_prepare do
-        map = eval File.read(conf)
+        map = Shirinji::Map.load(conf)
         resolver.reload(map)
       end
 
